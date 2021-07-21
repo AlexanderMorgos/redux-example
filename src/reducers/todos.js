@@ -8,7 +8,7 @@ export const todos = (state = defaultState, action) => {
   const actions = {
     [TODOS_ACTION_TYPES.setTodo]: {
       ...state,
-      list: action.payload
+      list: [...state.list, action.payload]
     }
   };
 

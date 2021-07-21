@@ -1,9 +1,8 @@
 import { uuid } from 'uuidv4';
 
-import { getTodos as _getTodos } from '../selectors/todos';
 import { TODOS_ACTION_TYPES } from '../constants/todos';
 
-export const addTodo = (text) => async (dispatch, getState) => { // async await
+export const createTodo = (text) => async (dispatch, getState) => {
   const todo = {
     id: uuid(),
     text
@@ -11,16 +10,14 @@ export const addTodo = (text) => async (dispatch, getState) => { // async await
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const todos = _getTodos(getState());
-
   await dispatch({
     type: TODOS_ACTION_TYPES.setTodo,
-    payload: [...todos.list, todo]
+    payload: todo
   });
 };
 
-export const getTodos = () => (dispatch, getState) => {
-  const todos = _getTodos(getState());
+// Mocked retrieving data from API
 
-  return todos;
+export const getTodos = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 };

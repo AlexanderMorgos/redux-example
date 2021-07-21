@@ -3,24 +3,32 @@ import { connect } from 'react-redux';
 
 import { TodoManagement } from './components/TodoManagement';
 import { TodoList } from './components/TodoList';
-import { getTodos } from './selectors/todos';
-import { addTodo } from './actions/todos';
+import { selectTodos } from './selectors/todos';
+import { createTodo, getTodos } from './actions/todos';
+
+const AppComponent = ({ todos, createTodo, getTodos }) => {
+  const handleSubmit = async (data) => {
+    await createTodo(data);
+    await getTodos();
+  };
+
+  return (
+    <div>
+      <TodoManagement onSubmit={handleSubmit} />
+      <TodoList todos={todos} />
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
-  todos: getTodos(state)
+  todos: selectTodos(state)
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: (text) => dispatch(addTodo(text))
-  }
-}
-
-const AppComponent = ({ todos, addTodo }) => (
-  <div>
-    <TodoManagement addTodo={addTodo} />
-    <TodoList todos={todos} />
-  </div>
-);
+    getTodos,
+    createTodo: (text) => dispatch(createTodo(text)),
+  };
+};
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppComponent);

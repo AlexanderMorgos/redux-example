@@ -1,8 +1,7 @@
 import React from 'react';
 
-export const TodoManagement = ({ addTodo }) => {
+export const TodoManagement = ({ onSubmit }) => {
   const [inputValue, setInputValue] = React.useState('');
-  const [submitting, setSubmitting] = React.useState(false);
 
   const handleSubmit = React.useCallback(async (e) => {
     e.preventDefault();
@@ -10,15 +9,14 @@ export const TodoManagement = ({ addTodo }) => {
     if (!inputValue) {
       return;
     }
-    setSubmitting(true);
-    await addTodo(inputValue);
+
+    await onSubmit(inputValue);
     setInputValue('');
-    setSubmitting(false);
-  }, [inputValue, submitting])
+  }, [inputValue, onSubmit]);
 
   const handleChange = React.useCallback((e) => {
     setInputValue(e.target.value);
-  }, [])
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,7 +24,6 @@ export const TodoManagement = ({ addTodo }) => {
       <button type="submit">
         Add Todo
       </button>
-      {submitting && <div>Loading</div>}
     </form>
   );
 }
