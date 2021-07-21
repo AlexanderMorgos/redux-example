@@ -2,7 +2,7 @@ import React from 'react';
 
 export const TodoManagement = ({ addTodo }) => {
   const [inputValue, setInputValue] = React.useState('');
-  const [submitting, setSubmitting] = React.useState(false)
+  const [submitting, setSubmitting] = React.useState(false);
 
   const handleSubmit = React.useCallback(async (e) => {
     e.preventDefault();
