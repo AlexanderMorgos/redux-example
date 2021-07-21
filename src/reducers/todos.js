@@ -1,14 +1,15 @@
 import { TODOS_ACTION_TYPES } from '../constants/todos';
 
-export const todos = (state = [], action) => {
+const defaultState = {
+  list: []
+};
+
+export const todos = (state = defaultState, action) => {
   const actions = {
-    [TODOS_ACTION_TYPES.addTodo]: [
+    [TODOS_ACTION_TYPES.setTodo]: {
       ...state,
-      {
-        id: action.id,
-        text: action.text
-      }
-    ]
+      list: action.payload
+    }
   };
 
   return actions[action.type] || state;

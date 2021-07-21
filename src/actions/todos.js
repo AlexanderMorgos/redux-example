@@ -9,23 +9,18 @@ export const addTodo = (text) => async (dispatch, getState) => { // async await
     text
   };
 
-  await dispatch({
-    type: TODOS_ACTION_TYPES.addTodo, 
-    payload: todo
-  });
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // moking create logic
-
-  const { list } = _getTodos(getState());
+  const todos = _getTodos(getState());
 
   await dispatch({
     type: TODOS_ACTION_TYPES.setTodo,
-    payload: [...list, todo]
+    payload: [...todos.list, todo]
   });
 };
 
 export const getTodos = () => (dispatch, getState) => {
-  const { list } = _getTodos(getState());
+  const todos = _getTodos(getState());
 
-  return list;
+  return todos;
 };
