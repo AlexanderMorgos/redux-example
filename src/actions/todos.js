@@ -8,7 +8,9 @@ export const createTodo = (text) => async (dispatch, getState) => {
     text
   };
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Mocked retrieving data from API
 
   await dispatch({
     type: TODOS_ACTION_TYPES.setTodo,
@@ -16,8 +18,7 @@ export const createTodo = (text) => async (dispatch, getState) => {
   });
 };
 
-// Mocked retrieving data from API
 
 export const getTodos = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
 };

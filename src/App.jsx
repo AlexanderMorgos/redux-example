@@ -7,10 +7,10 @@ import { selectTodos } from './selectors/todos';
 import { createTodo, getTodos } from './actions/todos';
 
 const AppComponent = ({ todos, createTodo, getTodos }) => {
-  const handleSubmit = async (data) => {
+  const handleSubmit = React.useCallback(async (data) => {
     await createTodo(data);
-    await getTodos();
-  };
+    getTodos();
+  }, [createTodo, getTodos]);
 
   return (
     <div>
